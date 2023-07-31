@@ -15,14 +15,15 @@ exports.newProduct = async(req,res, next) =>{
 }
 
 //Get all products => /api/v1/products
-exports.getProducts= (req,res,next) => {
+exports.getProducts= async (req,res,next) => {
 
-    //const products = Product.find();
+    const products = await Product.find();
 
 
     res.status(200).json({
         success: true,
         // count: products.length,
-        message: "Here goes the products"
+        // message: "Here goes the products"
+        products
     })
 }
