@@ -17,8 +17,6 @@ exports.newProduct = async(req,res, next) =>{
 //Get all products => /api/v1/products
 exports.getProducts= async (req,res,next) => {
 
-    try{
-
         const products = await Product.find();
 
 
@@ -28,7 +26,5 @@ exports.getProducts= async (req,res,next) => {
             // message: "Here goes the products"
             products
         })
-    }catch(error){
-        console.log(error)
-    }
+
 }
