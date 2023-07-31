@@ -17,13 +17,18 @@ exports.newProduct = async(req,res, next) =>{
 //Get all products => /api/v1/products
 exports.getProducts= async (req,res,next) => {
 
-    const products = await Product.find();
+    try{
+
+        const products = await Product.find();
 
 
-    res.status(200).json({
-        success: true,
-        // count: products.length,
-        // message: "Here goes the products"
-        products
-    })
+        res.status(200).json({
+            success: true,
+            // count: products.length,
+            // message: "Here goes the products"
+            products
+        })
+    }catch(error){
+        console.log(error)
+    }
 }
