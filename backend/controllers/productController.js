@@ -1,5 +1,5 @@
 const Product = require('../models/product');
-
+const ErrorHandler = require('../utils/errorHandler');
 
 //Create new product on database => /api/v1/admin/product/new
 
@@ -35,10 +35,13 @@ exports.getSingleProduct = async (req, res, next) =>{
     const product = await Product.findById(req.params.id)
 
     if (!product){
-        return res.status(404).json({
-            success:false,
-            message: 'Product not found'
-        })
+        //opción 1: utilizar un response en caso de error
+        // return res.status(404).json({
+        //     success:false,
+        //     message: 'Product not found'
+        // })
+        //opción 2: utilizar el manejador de errores globales
+        return next(new ErrorHandler('Product not found', 404))
     }
 
     res.status(200).json({
