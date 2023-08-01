@@ -21,7 +21,7 @@ exports.newProduct = catchAsyncErrors(async(req,res, next) =>{
 exports.getProducts= catchAsyncErrors(async (req,res,next) => {
 
         const resPerPage = 4;
-        const productCount = await Product.coountDocuments();//usamos esta variable para el forntend
+        const productCount = await Product.countDocuments();//usamos esta variable para el forntend
 
         const apiFeatures = new APIFeatures(Product.find(), req.query )
                             .search()
