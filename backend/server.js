@@ -11,6 +11,6 @@ connectDatabase();
 
 
 app.listen(process.env.PORT, () =>{
-    console.log(`server runing on PORT:  ${process.env.PORT}`);
+    console.log(`server runing on PORT:  ${process.env.PORT} in ${process.env.NODE_ENV} mode`);
 })
 // ``
