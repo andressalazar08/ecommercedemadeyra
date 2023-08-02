@@ -3,6 +3,7 @@ const Product = require('../models/product');
 
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
+const order = require('../models/order');
 
 
 //create a new order => /api/v1/order/new
@@ -71,7 +72,7 @@ exports.myOrders = catchAsyncErrors(async(req, res, next)=>{
 })
 
 
-// Get all orders in the system => /api/v1/admin/orders
+// Get all orders in the system by ADMIN role => /api/v1/admin/orders
 
 exports.allOrders = catchAsyncErrors(async(req, res, next)=>{
 
@@ -90,3 +91,39 @@ exports.allOrders = catchAsyncErrors(async(req, res, next)=>{
         orders
     })
 })
+
+
+
+// Update / process order ADMIN role => /api/v1/admin/orders
+
+exports.updateProcessOrders = catchAsyncErrors(async(req, res, next)=>{
+
+    const orders = await Order.findById(req.params.id)
+
+    if(orders.orderStatus==='Delivered'){
+        return next(new ErrorHandler('You have already delivered this order', 400))
+    }
+
+    orders.orderItems.forEach(async item =>{
+        await updateStock(item.product, item.quantity)
+    })
+
+    orders.orderStatus = req.body.orderStatus
+    orders.delieverAt = Date.now()
+
+    await orders.save()
+
+    res.status(200).json({
+        success: true,
+
+    })
+})
+
+
+async function updateStock(id, quantity){
+    const product =await Product.findById(id);
+
+    product.stock = product.stock - quantity;
+
+    await product.save({validateBeforeSave:false});
+}
