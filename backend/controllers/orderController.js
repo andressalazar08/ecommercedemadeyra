@@ -69,3 +69,24 @@ exports.myOrders = catchAsyncErrors(async(req, res, next)=>{
         orders
     })
 })
+
+
+// Get all orders in the system => /api/v1/admin/orders
+
+exports.allOrders = catchAsyncErrors(async(req, res, next)=>{
+
+    const orders = await Order.find()
+
+    let totalAmount =0;
+
+    //se acumula el valor total de las ordenes para consulta
+    orders.forEach(or=>{
+        totalAmount += or.totalPrice
+    })
+
+    res.status(200).json({
+        success: true,
+        totalAmount,
+        orders
+    })
+})
