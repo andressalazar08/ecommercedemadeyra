@@ -32,7 +32,6 @@ const productSchema =  new mongoose.Schema({
                 type: String,
                 required: true
             }
-
         }
     ],
     category:{
@@ -40,17 +39,8 @@ const productSchema =  new mongoose.Schema({
         required: [true, 'Please select category for this product'],
         enum:{
             values:[
-                'Electronics',
-                'Cameras',
-                'Laptop',
-                'Accessories',
-                'Headphones',
-                'Food',
-                'Books',
-                'Clothes/Shoes',
-                'Sports',
-                'Outdoor',
-                'Home'
+                'Electronics', 'Cameras','Laptop','Accessories','Headphones','Food',
+                'Books', 'Clothes/Shoes', 'Sports','Outdoor', 'Home'
             ],
             message: 'Please select correct category for product'
         }
@@ -100,7 +90,6 @@ const productSchema =  new mongoose.Schema({
         type:Date,
         default: Date.now
     }
-
 
 })
 
