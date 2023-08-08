@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {
     ALL_PRODUCTS_REQUEST,
     ALL_PRODUCTS_SUCCESS,
@@ -56,7 +56,7 @@ export const productDetailsReducer = (state={product:{}}, action)=>{
 
         case PRODUCT_DETAILS_SUCCESS:
             return {
-                loading: true,
+                loading: false,
                 product: action.payload
             }
 
