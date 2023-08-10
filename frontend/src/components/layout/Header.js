@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import '../../App.css';
 import Search from './Search';
+// import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 const Header = () => {
@@ -11,7 +12,9 @@ const Header = () => {
             <nav className="navbar row">
                     <div className="col-12 col-md-3">
                         <div className="navbar-brand">
-                        <img src="/images/shopit_logo.png" />
+                          <Link to="/">
+                           <img src="/images/shopit_logo.png" />
+                          </Link>
                         </div>
                     </div>
 
