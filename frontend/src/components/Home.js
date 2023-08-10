@@ -11,7 +11,7 @@ import { useAlert } from 'react-alert';
 
 import Loader from './layout/Loader';
 
-const Home = () => {
+const Home = ({ match }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -20,17 +20,21 @@ const Home = () => {
 
   const { loading, products, error, productCount, resPerPage  } = useSelector(state=>state.products)
 
-  useEffect(()=>{
+  const keyword = match.params.keyword
 
+
+  useEffect(()=>{
+    //qué quiero hacer cuando el componente se monta o actualiza
     if(error){
 
       return alert.error(error)
     }
 
-    dispatch(getProducts(currentPage))
+    dispatch(getProducts(keyword, currentPage))
 
-
-  },[dispatch,alert, error, currentPage])
+    //el array de dependencias es para administrar cuando el componente se actualiza
+    //cuando la variable se modifica se vuelve a ejecutar el useEffect
+  },[dispatch,alert, error, keyword, currentPage])
 
 
   function setCurrentPageNo(pageNumber){
